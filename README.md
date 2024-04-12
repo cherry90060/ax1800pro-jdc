@@ -24,7 +24,7 @@ windows系统没有自带 CH340 的驱动，要去网上找个驱动安上。
 路由器开机，按回车进入 6018# 模式。此时已经可以使用 boot loader 的命令了。
 将 u-boot.mbn 复制到 Tftpd64 同一目录。启动 Tftpd64 。
 注：此时 server interface 里的 IP 地址应为 192.168.10.1 。
-u-boot 可以从 https://github.com/bfmen/uboot-ipq60xx-build 这里下载。
+u-boot 可以从 https://github.com/cherry90060/ax1800pro-jdc/blob/main/u-boot.mbn 这里下载。
 中 putty 里敲入如下命令完成刷机
 tftpboot u-boot.mbn && flash 0:APPSBL && flash 0:APPSBL_1
 看到命令输出里有几个 `OK` 就完成 u-boot 刷机了。
