@@ -78,3 +78,5 @@ ls /mnt/mmcblk0p28    检查是否拷贝成功，看到 lost+found  upper       
 最后，reboot 重启OpenWrt。
 
 删除WiFi（再软件包里面找到kmod-cfg80211-linux 移除，再用ssh登陆路由器 进入etc/config/wireless 删除即可，高版本wifi驱动可能是ath11相关模块）
+本人不对任何人因使用本固件所遭受的任何理论或实际的损失承担责任！
+本固件禁止用于任何商业用途，请务必严格遵守国家互联网使用相关法律规定！
