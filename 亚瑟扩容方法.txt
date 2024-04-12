@@ -1,0 +1,30 @@
+亚瑟AX1800PRO 扩容overlay方案记录
+
+思路 mmcblk0p27太大了，保留200g，剩下的拆分出来，想怎么安排就自己安排。
+
+lsblk 命令查看当前固件分区格式
+cfdisk  /dev/mmcblk0   分区  网上有教程，把27删掉，划分为27 28，28我们自用。
+需要重启路由器才生效
+
+格式化之前要取消挂载 否则无法格式化
+mkfs.ext4 /dev/mmcblk0p27
+mkfs.ext4 /dev/mmcblk0p28
+大盘格式化很慢，感觉这个方案应该不影响其他的。
+
+
+挂载
+mount /dev/mmcblk0p27 /mnt/mmcblk0p27
+先创建 mmcblk0p28目录然后挂载
+mount /dev/mmcblk0p28 /mnt/mmcblk0p28
+拷贝overlay到28目录
+cp -r /overlay/* /mnt/mmcblk0p28
+
+ls /mnt/mmcblk0p28    检查是否拷贝成功，看到 lost+found  upper       work 说明拷贝成功。
+
+打开WEB管理界面，点“挂载点”划到最下面找到添加
+先取消overlay挂载，然后再挂载
+        第一步：启用挂载点
+        第二步：在uuid直接选中自己刚刚新建的分区
+        第三步：挂载点选项卡，选“作为外部 overlay 使用”
+        第四步： 保存并使用 （需要取消原来的 overlay 挂载点，原可以挂载loop0）
+最后，reboot 重启OpenWrt。
